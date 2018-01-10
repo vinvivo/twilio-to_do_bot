@@ -73,7 +73,7 @@ def getReply(message):
         for line in message:
             x = re.findall('([0-9]+)', line)
             if len(x) > 0:
-                removenum = int(x[0]) + 1   # +1 since index starts at 0
+                removenum = int(x[0]) - 1   # -1 since index starts at 0
         
         # remove item at index given by user
         todolist.pop(removenum)
