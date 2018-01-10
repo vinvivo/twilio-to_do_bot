@@ -52,17 +52,17 @@ def getReply(message):
 
         # Send confirmation reply
         answer = "{} was added to to-do list".format(item)
-        print("Item added to list" + todolist)  # for development
+        print("Item added to list", todolist)  # for development
 
     elif "list" in message:
         answer = "This is what's on your to-do list: <list items here>"
-        print("Show user their to-do list" + todolist)
+        print("Show user their to-do list", todolist)
 
     elif "remove" in message:
         # remove keyword "remove #" from message
         item = removeHead(message, "remove")    # TODO: how to handle list number
         answer = "Removed item from to-do list"
-        print("Removed item from to-do list" + todolist)
+        print("Removed item from to-do list", todolist)
 
     else:
         answer = "Welcome to To-Do List Bot! These are the commands you may use: \nAdd \nList \nRemove"
