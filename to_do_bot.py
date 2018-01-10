@@ -59,7 +59,7 @@ def getReply(message):
     elif "list" in message:
         lst = ""
         for count, elem in enumerate(todolist, 1):
-            lst += f"{count}. {elem}\n"
+            lst += "{}. {} \n".format(count, elem)
         answer = "This is what's on your To-Do list: \n{}".format(lst)
         print("Show user their to-do list", lst)
 
