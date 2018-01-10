@@ -18,6 +18,8 @@ from twilio.twiml.messaging_response import MessagingResponse
 
 app = Flask(__name__)
 
+todolist = []   # store list items
+
 @app.route("/sms", methods=['GET', 'POST'])
 def incoming_sms():
     """Receive incoming SMS and respond according to keywords"""
@@ -39,7 +41,6 @@ def getReply(message):
     # Clean up incoming SMS
     message = message.lower().strip()
 
-    todolist = []   # store list items
     answer = ""     # store response text
     item = ""       # store item name
 
@@ -51,17 +52,17 @@ def getReply(message):
         todolist.append(item)
 
         # Send confirmation reply
-        answer = "{} was added to to-do list".format(item)
+        answer = "'{}' was added to To-Do list".format(item)
         print("Item added to list", todolist)  # for development
 
     elif "list" in message:
-        answer = "This is what's on your to-do list: <list items here>"
+        answer = "This is what's on your To-Do list: <list items here>"
         print("Show user their to-do list", todolist)
 
     elif "remove" in message:
         # remove keyword "remove #" from message
         item = removeHead(message, "remove")    # TODO: how to handle list number
-        answer = "Removed item from to-do list"
+        answer = "Removed item from To-Do list"
         print("Removed item from to-do list", todolist)
 
     else:
