@@ -15,6 +15,7 @@
 
 from flask import Flask, request, redirect
 from twilio.twiml.messaging_response import MessagingResponse
+import re   # using regex for remove function
 
 app = Flask(__name__)
 
@@ -53,11 +54,14 @@ def getReply(message):
 
         # Send confirmation reply
         answer = "'{}' was added to To-Do list".format(item)
-        print("Item added to list", todolist)  # for development
+        print("Item added to list", todolist)
 
     elif "list" in message:
-        answer = "This is what's on your To-Do list: <list items here>"
-        print("Show user their to-do list", todolist)
+        lst = ""
+        for count, elem in enumerate(todolist, 1):
+            lst += f"{count}. {elem}\n"
+        answer = "This is what's on your To-Do list: \n{}".format(lst)
+        print("Show user their to-do list", lst)
 
     elif "remove" in message:
         # remove keyword "remove #" from message
