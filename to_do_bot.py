@@ -45,7 +45,7 @@ def getReply(message):
     answer = ""     # store response text
     item = ""       # store item name
 
-    if "add" in message:
+    if message.startswith("add"):
         # remove keyword "add" from message
         item = removeHead(message, "add")
 
@@ -56,16 +56,27 @@ def getReply(message):
         answer = "'{}' was added to To-Do list".format(item)
         print("Item added to list", todolist)
 
-    elif "list" in message:
-        lst = ""
+    elif message.startswith("list"):
+        lst = ""    # store enumerated list
+
+        # This will enumerate todolist every time user sends "list" sms
         for count, elem in enumerate(todolist, 1):
-            lst += "{}. {} \n".format(count, elem)
+            lst += "{}. {}\n".format(count, elem)
+        
+        # Reply with enumerated list
         answer = "This is what's on your To-Do list: \n{}".format(lst)
         print("Show user their to-do list", lst)
 
-    elif "remove" in message:
-        # remove keyword "remove #" from message
-        item = removeHead(message, "remove")    # TODO: how to handle list number
+    elif message.startswith("remove"):
+        # Extract what item number user wants to remove
+        removenum = int
+        for line in message:
+            x = re.findall('([0-9]+)', line)
+            if len(x) > 0:
+                removenum = x + 1   # +1 since index starts at 0
+        
+        # remove item at index given by user
+        todolist.pop(removenum)
         answer = "Removed item from To-Do list"
         print("Removed item from to-do list", todolist)
 
