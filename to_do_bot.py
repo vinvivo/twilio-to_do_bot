@@ -40,7 +40,8 @@ def incoming_sms():
 def getReply(message):
     """Function to formulate response based on incoming SMS body."""
     # Clean up incoming SMS
-    message = message.lower().strip()
+    # message = message.lower().strip()
+    message = message.strip()
 
     answer = ""     # store response text
     item = ""       # store item name
@@ -84,7 +85,7 @@ def getReply(message):
         print("Removed item from to-do list", todolist)
 
     else:
-        answer = "Welcome to To-Do List Bot! These are the commands you may use: \nAdd \nList \nRemove"
+        answer = "Welcome to To-Do List Bot! These are the commands you may use: \nadd \nlist \nremove"
 
     if len(answer) > 1500:
         answer = answer[0:1495] + "..."
