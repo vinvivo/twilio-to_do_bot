@@ -68,13 +68,16 @@ def getReply(message):
         print("Show user their to-do list", lst)
 
     elif message.startswith("remove"):
+        # TODO: Fix regex so it will remove double digit indices
         # Extract what item number user wants to remove
         removenum = int
         for line in message:
             x = re.findall('([0-9]+)', line)
             if len(x) > 0:
                 removenum = int(x[0]) - 1   # -1 since index starts at 0
-        
+                print "x =", x
+                print "item number to remove:", removenum
+
         # remove item at index given by user
         todolist.pop(removenum)
         answer = "Removed item from To-Do list"
