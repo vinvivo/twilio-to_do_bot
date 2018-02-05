@@ -13,13 +13,17 @@
     To complete this objective, add an item to your to-do list called "Complete this objective." Then give us the phone number for your To-do Bot below.
 """
 
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, render_template
 from twilio.twiml.messaging_response import MessagingResponse
 import re   # using regex for remove function
 
 app = Flask(__name__)
 
 todolist = []   # store list items
+
+@app.route("/", methods=['GET', 'POST'])
+def hello_world():
+    return "Hello, world!"
 
 @app.route("/sms", methods=['GET', 'POST'])
 def incoming_sms():
@@ -99,6 +103,11 @@ def removeHead(fromThis, removeThis):
         fromThis = fromThis[len(removeThis):].strip()
     
     return fromThis
+
+
+@app.route("/status", methods=['GET', 'POST'])
+def statuspage():
+    return render_template('status.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
